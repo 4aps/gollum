@@ -1,0 +1,6 @@
+.gollum
+.gollumignore
+build/*
+!build/.gitkeep
+run
+testing/
