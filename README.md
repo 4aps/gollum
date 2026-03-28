@@ -1,19 +1,19 @@
-# gollum
+# Gollum
 
-A minimal Git-like version control system built in C++ to understand how Git works under the hood. Gollum implements the core concepts of content-addressable storage, object model, and version control in a clean, educational codebase.
+A minimal Git-like version control system built in C++ to understand how Git works under the hood. gollum implements the core concepts of content-addressable storage, object model, and version control in a clean, educational codebase.
 
 ## Features
 
 Gollum currently supports:
 
-* **Repository Management**: Initialize repositories with `.Gollum` directory structure
+* **Repository Management**: Initialize repositories with `.gollum` directory structure
 * **Object Model**: Blob, Tree, and Commit objects with Git-style headers
 * **Content Addressing**: SHA-256 hashing with compressed storage using zlib
 * **Staging Area**: Index-based staging system with file permissions
 * **Branching**: Create, list, and switch between branches
 * **Commits**: Create commits with parent relationships and merge support
 * **History**: View commit history and repository status
-* **Ignore System**: `.Gollumignore` file support for excluding files
+* **Ignore System**: `.gollumignore` file support for excluding files
 * **Working Directory**: Checkout and update working directory from commits
 
 ---
@@ -43,9 +43,9 @@ sudo apt install cmake libssl-dev zlib1g-dev
 Build using CMake:
 
 ```bash
-cmake -S /path/to/Gollum -B /path/to/Gollum/build \
+cmake -S /path/to/gollum -B /path/to/gollum/build \
       -DCMAKE_PREFIX_PATH="$(brew --prefix openssl@3);$(brew --prefix zlib)"
-cmake --build /path/to/Gollum/build -j4
+cmake --build /path/to/gollum/build -j4
 ```
 
 Or compile directly with g++:
@@ -54,10 +54,10 @@ Or compile directly with g++:
 # macOS
 g++ -std=c++17 -Iinclude -I$(brew --prefix openssl@3)/include \
     src/main.cpp src/commands/*.cpp src/utils/*.cpp \
-    -L$(brew --prefix openssl@3)/lib -lssl -lcrypto -lz -o build/Gollum
+    -L$(brew --prefix openssl@3)/lib -lssl -lcrypto -lz -o build/gollum
 
 # Linux
- g++ -std=c++17 -Iinclude src/main.cpp src/commands/*.cpp src/utils/*.cpp -lssl -lcrypto -lz -o build/Gollum
+ g++ -std=c++17 -Iinclude src/main.cpp src/commands/*.cpp src/utils/*.cpp -lssl -lcrypto -lz -o build/gollum
 ```
 
 ### Windows
@@ -72,9 +72,9 @@ vcpkg install openssl zlib
 Build using CMake:
 
 ```powershell
-cmake -S C:\path\to\Gollum -B C:\path\to\Gollum\build \
+cmake -S C:\path\to\gollum -B C:\path\to\gollum\build \
       -DCMAKE_TOOLCHAIN_FILE=C:\path\to\vcpkg\scripts\buildsystems\vcpkg.cmake
-cmake --build C:\path\to\Gollum\build --config Release
+cmake --build C:\path\to\gollum\build --config Release
 ```
 
 Or compile directly with g++:
@@ -82,10 +82,10 @@ Or compile directly with g++:
 ```powershell
 g++ -std=c++17 -Iinclude -I<openssl_include> -I<zlib_include> \
     src/main.cpp src/commands/*.cpp src/utils/*.cpp \
-    -L<openssl_lib> -L<zlib_lib> -lssl -lcrypto -lz -o build\Gollum.exe
+    -L<openssl_lib> -L<zlib_lib> -lssl -lcrypto -lz -o build\gollum.exe
 ```
 
-The binary will be at `build/Gollum` (or `build\Release\Gollum.exe` on Windows).
+The binary will be at `build/gollum` (or `build\Release\gollum.exe` on Windows).
 
 ---
 
@@ -94,55 +94,55 @@ The binary will be at `build/Gollum` (or `build\Release\Gollum.exe` on Windows).
 ### Repository Management
 ```bash
 # Initialize a new repository
-./build/Gollum init
+./build/gollum init
 
 # Show repository status
-./build/Gollum status
+./build/gollum status
 ```
 
 ### Object Operations
 ```bash
 # Create blob from file and get hash
-./build/Gollum hash-object <filename>
+./build/gollum hash-object <filename>
 
 # Read object content by hash
-./build/Gollum cat-file <object-hash>
+./build/gollum cat-file <object-hash>
 
 # Create tree from staged files
-./build/Gollum write-tree
+./build/gollum write-tree
 
 # Create commit from tree
-./build/Gollum commit-tree <tree-hash> [<parent1-hash>] [<parent2-hash>] [<message>]
+./build/gollum commit-tree <tree-hash> [<parent1-hash>] [<parent2-hash>] [<message>]
 ```
 
 ### Staging and Commits
 ```bash
 # Stage files for commit
-./build/Gollum add <filename> [<filename>...]
+./build/gollum add <filename> [<filename>...]
 
 # Create commit with editor
-./build/Gollum commit
+./build/gollum commit
 ```
 
 ### Branching
 ```bash
 # List all branches
-./build/Gollum branch
+./build/gollum branch
 
 # Create new branch
-./build/Gollum branch <branch-name>
+./build/gollum branch <branch-name>
 
 # Switch to branch
-./build/Gollum switch <branch-name>
+./build/gollum switch <branch-name>
 
 # Update branch reference
-./build/Gollum update-ref <ref-path> <commit-hash>
+./build/gollum update-ref <ref-path> <commit-hash>
 ```
 
 ### History
 ```bash
 # Show commit history
-./build/Gollum log
+./build/gollum log
 ```
 
 ## Usage Examples
@@ -150,30 +150,30 @@ The binary will be at `build/Gollum` (or `build\Release\Gollum.exe` on Windows).
 ### Basic Workflow
 ```bash
 # Initialize repository
-./build/Gollum init
+./build/gollum init
 
 # Stage files
-./build/Gollum add README.md src/main.cpp
+./build/gollum add README.md src/main.cpp
 
 # Create commit
-./build/Gollum commit
+./build/gollum commit
 
 # Create and switch to new branch
-./build/Gollum branch feature-branch
-./build/Gollum switch feature-branch
+./build/gollum branch feature-branch
+./build/gollum switch feature-branch
 
 # View history
-./build/Gollum log
+./build/gollum log
 ```
 
 ### Object Inspection
 ```bash
 # Get file hash
-HASH=$(./build/Gollum hash-object README.md)
+HASH=$(./build/gollum hash-object README.md)
 echo "File hash: $HASH"
 
 # Read object content
-./build/Gollum cat-file "$HASH"
+./build/gollum cat-file "$HASH"
 ```
 
 ---
@@ -181,7 +181,7 @@ echo "File hash: $HASH"
 ## Architecture
 
 ### Object Model
-Gollum implements Git's object model with three core types:
+gollum implements Git's object model with three core types:
 
 - **Blob**: Represents file content with Git-style headers (`blob <size>\0<content>`)
 - **Tree**: Directory structure containing references to blobs and subtrees
@@ -195,7 +195,7 @@ Gollum implements Git's object model with three core types:
 
 ### Repository Structure
 ```
-.Gollum/
+.gollum/
 ├── objects/          # Content-addressable object storage
 ├── refs/
 │   └── heads/        # Branch references
@@ -216,7 +216,7 @@ Supports Git-style file modes:
 ## Project Structure
 
 ```
-Gollum/
+gollum/
 ├── src/
 │   ├── main.cpp                    # Entry point and CLI interface
 │   ├── commands/                   # Command implementations
@@ -233,7 +233,7 @@ Gollum/
 │   │   ├── status.cpp             # Repository status
 │   │   └── update-ref.cpp         # Reference updates
 │   └── utils/                     # Core utilities
-│       ├── Gollum.cpp                # Helper functions
+│       ├── gollum.cpp                # Helper functions
 │       ├── compress.cpp           # zlib compression/decompression
 │       ├── objects.cpp            # Object model implementation
 │       └── head.cpp               # HEAD management
