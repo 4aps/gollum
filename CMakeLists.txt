@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.16)
-project(ark LANGUAGES CXX)
+project(gollum LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-add_executable(ark
+add_executable(gollum
     src/main.cpp
 
     src/commands/init.cpp
@@ -23,23 +23,23 @@ add_executable(ark
 
     src/utils/compress.cpp
     src/utils/objects.cpp
-    src/utils/ark.cpp
+    src/utils/gollum.cpp
     src/utils/head.cpp
 )
 
-target_include_directories(ark PUBLIC ${CMAKE_SOURCE_DIR}/include)
+target_include_directories(gollum PUBLIC ${CMAKE_SOURCE_DIR}/include)
 
 find_package(OpenSSL REQUIRED)
-target_link_libraries(ark PRIVATE OpenSSL::SSL OpenSSL::Crypto)
+target_link_libraries(gollum PRIVATE OpenSSL::SSL OpenSSL::Crypto)
 
 find_package(ZLIB REQUIRED)
-target_link_libraries(ark PRIVATE ZLIB::ZLIB)
+target_link_libraries(gollum PRIVATE ZLIB::ZLIB)
 
 if (APPLE)
-    target_compile_definitions(ark PRIVATE _DARWIN_C_SOURCE)
+    target_compile_definitions(gollum PRIVATE _DARWIN_C_SOURCE)
 endif()
 
-install(TARGETS ark RUNTIME DESTINATION bin)
+install(TARGETS gollum RUNTIME DESTINATION bin)
 
 enable_testing()
 
